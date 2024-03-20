@@ -19,9 +19,9 @@ regd_users.post("/login", (req,res) => {
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
-// Add a book review
+//Add a book review
 regd_users.put("/auth/review/:isbn", (req, res) => {
-  //Write your code here
+  Write your code here
   return res.status(300).json({message: "Yet to be implemented"});
 });
 
