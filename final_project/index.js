@@ -3,7 +3,8 @@ const jwt = require('jsonwebtoken');
 const session = require('express-session')
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
-public_users.get('/',function (req, res) { public_users.get('/isbn/:isbn',function (req, res) {
+public_users.get('/',function (req, res) { 
+ public_users.get('/isbn/:isbn',function (req, res) {
  public_users.get('/author/:author',function (req, res) {
   public_users.get('/title/:title',function (req, res) {
    public_users.get('/review/:isbn',function (req, res) {
