@@ -2,6 +2,7 @@ const express = require('express');
 let books = require("./booksdb.js");
 let isValid = require("./auth_users.js").isValid;
 let users = require("./auth_users.js").users;
+const axios = require('axios');
 const public_users = express.Router();
 
 
@@ -32,22 +33,63 @@ public_users.post("/register", (req,res) => {
   
 });
 
-// Get the book list available in the shop
-public_users.get('/',function (req, res) {
-  res.status(200).json(JSON.stringify(books));
-});
 
+
+
+
+// Get the book list available in the shop using a Promise
+public_users.get('/', async function (req, res) {
+    try {
+      const booksData = await new Promise((resolve, reject) => {
+        resolve(books); 
+        res.status(200).json(JSON.stringify(books));
+      });
+      res.status(200).json(booksData);
+    } catch (error) {
+      res.status(500).json({ error: 'An error occurred' });
+    }
+  });
+
+
+
+/*
 // Get book details based on ISBN
+public_users.get('/isbn/:isbn', async function (req, res) {
+    const theISBN = req.params.isbn;
+
+    try {
+        const response = await axios.get(`http://localhost:5000/router/books/3`);  // Adjust URL as per your backend setup
+
+        // Assuming the response.data contains the book object
+        const theBook = response.data;
+
+        res.status(200).json(theBook);
+    } catch (error) {
+        // Handle errors
+        console.error('Error fetching book:', error);
+        res.status(500).json({ error: 'Failed to fetch book' });
+    }
+});
+ 
+ 
 public_users.get('/isbn/:isbn',function (req, res) {
     const theISBN=req.params.isbn;
     let theBook='';
-    for (let key in books) {
-        if (key === theISBN) {
-            theBook =books[key];
-        }
-    }
-   res.status(200).json(theBook);
+    let myPromise = new Promise((resolve,reject) => {
+        setTimeout(() => {
+            for (let key in books) {
+                if (key === theISBN) {
+                    theBook =books[key];
+                }
+            }
+          resolve(theBook)
+        },2000)})
+
+    myPromise.then((successMessage) => {
+        console.log("From Callback " + successMessage)
+      })
  });
+*/
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
