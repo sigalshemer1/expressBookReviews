@@ -3,7 +3,10 @@
 let books = {
       1: {"author": "Chinua Achebe","title": "Things Fall Apart", "reviews": {} },
       2: {"author": "Hans Christian Andersen","title": "Fairy tales", "reviews": {} },
-      3: {"author": "Dante Alighieri","title": "The Divine Comedy", "reviews": {} },
+      3: {"author": "Dante Alighieri","title": "The Divine Comedy", "reviews": [
+                    {"userID": "1", "review" :"This is a review for The divine Comedy"},
+                    {"userID": "2", "review" :"This is the second review for The divine Comedy"}
+      ]},
       4: {"author": "Unknown","title": "The Epic Of Gilgamesh", "reviews": {} },
       5: {"author": "Unknown","title": "The Book Of Job", "reviews": {} },
       6: {"author": "Unknown","title": "One Thousand and One Nights", "reviews": {} },
