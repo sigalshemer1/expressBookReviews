@@ -39,31 +39,50 @@ public_users.get('/',function (req, res) {
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-    const theISBN=JSON.stringify(req.body.isbn);
-    res.status(200).json(theISBN);
-   //let theBook= books.filter((theISBN));
-  // res.status(200).json(theISBN);
+    const theISBN=req.params.isbn;
+    let theBook='';
+    for (let key in books) {
+        if (key === theISBN) {
+            theBook =books[key];
+        }
+    }
+   res.status(200).json(theBook);
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-    const theAuthor=JSON.stringify(req.params);
-   // const a=theAuthor.split(':');
-    res.status(200).json(theAuthor);
-   //let theBook= books.filter((theAuthor));
-   // res.status(200).json(theBook);
+    const theAuthor=req.params.author;
+    let theBook='';
+    for (let key in books) {
+        if (books[key].author === theAuthor) {
+            theBook =books[key];
+        }
+    }
+   res.status(200).json(theBook);
 });
 
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const theTitle=req.params.title;
+    let theBook='';
+    for (let key in books) {
+        if (books[key].title === theTitle) {
+            theBook =books[key];
+        }
+    }
+   res.status(200).json(theBook);
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    const theISBN=req.params.isbn;
+    let theBookReviews='';
+    for (let key in books) {
+        if (key === theISBN) {
+            theBookReviews =books[key].reviews;
+        }
+    }
+   res.status(200).json(theBookReviews);
 });
 
 module.exports.general = public_users;
